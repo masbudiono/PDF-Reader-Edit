@@ -3,6 +3,7 @@ import fitz
 from streamlit_drawable_canvas import st_canvas
 from PIL import Image
 import io
+import base64
 
 st.set_page_config(page_title="PDF Editor", layout="wide")
 st.title("📄 PDF Editor - Hapus & Tambah Teks")
@@ -18,12 +19,17 @@ if uploaded_file is not None:
     pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
     img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
     
-    st.write("**Gambar PDF - Area yang diarsir akan dihapus**")
+    # Convert PIL Image ke bytes buat st_canvas
+    buffered = io.BytesIO()
+    img.save(buffered, format="PNG")
+    img_bytes = buffered.getvalue()
+    
+    st.write("**Gambar PDF - Arsir area yang mau dihapus**")
     canvas_result = st_canvas(
         fill_color="rgba(255, 0, 0, 0.3)",
         stroke_width=20,
         stroke_color="rgba(255, 0, 0, 0.3)",
-        background_image=img,
+        background_image=img_bytes,  # pakai bytes bukan PIL Image
         update_streamlit=True,
         height=pix.height,
         width=pix.width,
