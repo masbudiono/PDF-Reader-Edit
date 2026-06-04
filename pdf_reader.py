@@ -53,7 +53,7 @@ if uploaded:
             page.insert_text((text_pos_x/2, text_pos_y/2), new_text, fontsize=12, color=(0, 0, 0))
         
         # Simpan PDF baru
-        buf = io.BytesIO()
-        doc.save(buf)
-        buf.seek(0)
-        st.download_button("Download PDF Hasil Edit", buf, "edited.pdf", "application/pdf")
+        buf_img = io.BytesIO()
+img.save(buf_img, format="PNG")
+img_bytes = buf_img.getvalue()
+background_image=img_bytes
