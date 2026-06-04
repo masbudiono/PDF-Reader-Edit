@@ -1,5 +1,4 @@
 streamlit
-opencv-python-headless
+PyMuPDF
+streamlit-drawable-canvas
 pillow
-img2pdf
-numpy
